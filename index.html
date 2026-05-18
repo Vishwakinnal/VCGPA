@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>V CGPA - VTU 2022 Scheme Calculator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="top"><div class="top-in"><div class="seal">VTU</div><div class="brand"><h1>V CGPA</h1><p>VTU Belagavi 2022 Scheme SGPA, CGPA and marks-card report calculator</p></div><div class="badge">2022 SCHEME</div></div></header>
+<main class="wrap"><div class="grid"><aside>
+  <section class="card"><div class="head">Student Details</div><div class="body">
+    <div class="field"><label>Name</label><input id="stuName" placeholder="Student name"></div>
+    <div class="field"><label>USN / Roll No.</label><input id="stuUSN" placeholder="1XX22XX000"></div>
+    <div class="field"><label>College</label><input id="stuCollege" placeholder="College name"></div>
+    <div class="field"><label>Academic Year</label><input id="stuYear" placeholder="2022-26"></div>
+    <div class="field"><label>Branch</label><select id="branchSelect"></select></div>
+    <div class="field"><label>First-Year Group</label><select id="groupSelect"><option value="physics">Physics Group</option><option value="chemistry">Chemistry Group</option></select></div>
+  </div></section>
+  <section class="card" style="margin-top:14px"><div class="head">CGPA Summary</div><div class="body summary"><div class="circle"><b id="cgpaDisplay">-</b></div><div class="muted" id="pctDisplay">Percentage: -</div><div id="classDisplay"></div><div id="bars" style="margin-top:14px;text-align:left"></div><button class="download" id="downloadBtn" disabled>Download VTU-style PDF</button></div></section>
+  <section class="card src" style="margin-top:14px"><div class="head">Official Sources</div><div class="body small">Data is based on VTU official 2022 Scheme PDFs. Elective/OEC/AEC slots are kept editable because VTU colleges offer different approved choices.<br><br><a href="https://vtu.ac.in/en/b-e-scheme-syllabus/" target="_blank">VTU Scheme & Syllabus page</a></div></section>
+</aside><section><div id="tabs" class="tabs"></div><div class="panel"><div class="notice">Enter CIE and SEE marks exactly as shown on your result. For CIE-only/project subjects, enter the CIE/project mark and leave SEE disabled. Mandatory non-credit courses are shown but excluded from SGPA/CGPA as per VTU scheme notes.</div><div class="sem-head"><div><div class="sem-title" id="semTitle"></div><div class="small" id="semMeta"></div></div><div class="chip" id="sgpaChip">SGPA: -</div></div><div class="tools"><button id="clearSem">Clear Semester</button><button id="clearAll">Clear All Saved Data</button></div><div id="table"></div><div class="nav"><button id="prevBtn">Previous</button><button id="nextBtn">Next</button></div></div></section></div></main>
+<script src="app.js"></script>
+</body>
+</html>
+
