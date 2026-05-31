@@ -89,6 +89,7 @@ const appJsCode = fs.readFileSync(appJsPath, 'utf8') + `
   global.total = total;
   global.max = max;
   global.allSems = allSems;
+  global.renderSide = renderSide;
 `;
 eval(appJsCode);
 
@@ -232,6 +233,24 @@ predictTargetCGPA();
 outputHTML = global.document.getElementById('predictionOutput').innerHTML;
 assert("Predictor (On Track): Required future SGPA is 2.82", outputHTML.includes('2.82'));
 assert("Predictor (On Track): Feasibility status shows 'On Track' badge", outputHTML.includes('On Track') && outputHTML.includes('first'));
+
+// Group D: Unfilled/Incomplete Marks Warnings
+resetTestState();
+state.student.name = 'Test Student';
+state.student.usn = '1XX22CS001';
+state.student.college = 'Test College';
+state.student.year = '2022-26';
+
+// Case 1: No marks entered at all in any semester -> should have no warnings for course marks
+global.renderSide();
+let warningHTML = global.document.getElementById('warningContainer').innerHTML;
+assert("Warnings: No warning when no semesters have been started", !warningHTML.includes('Course Marks'));
+
+// Case 2: One mark entered in Sem 1 (Started) -> other courses in Sem 1 are unfilled, so it should warn
+setTestMark(0, 'BMATS101', 'cie', 40);
+global.renderSide();
+warningHTML = global.document.getElementById('warningContainer').innerHTML;
+assert("Warnings: Warns about unfilled course marks if a semester is started", warningHTML.includes('Course Marks (highlighted rows)'));
 
 // ============================================================================
 // 5. Print Summary Results

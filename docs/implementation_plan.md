@@ -68,8 +68,19 @@ Expand PDF export capability and perform automated regression checks.
   * Target status classification (e.g., Achievable).
   * Required future average SGPA.
 
-#### [NEW] [test_suite.js](file:///c:/Users/Vishwanath/Desktop/vcgpa%20-%20Copy/test_suite.js)
-* Create a dedicated unit testing script executing 20 separate assertions to automatically validate calculations checking grade boundaries, detention rules, and predictor engine algebra.
+#### [NEW] [test_suite.js](file:///c:/Users/Vishwanath/Desktop/vcgpa/test_suite.js)
+* Create a dedicated unit testing script executing separate assertions to automatically validate calculations checking grade boundaries, detention rules, predictor engine algebra, and unfilled marks warnings.
+
+---
+
+### Component 4: Unfilled Course Marks Warning (Phase 4)
+
+Add real-time visual styling and sidebar warnings when credit-bearing courses are left completely blank (unfilled) in started semesters.
+
+#### [MODIFY] [app.js](file:///c:/Users/Vishwanath/Desktop/vcgpa/app.js)
+* **Row Highlighting**: In `table()`, if a semester has at least one mark entered, highlight any credit-bearing course row in yellow if it lacks CIE or SEE marks (or lacks CIE for CIE-only courses).
+* **Sidebar Warnings**: In `renderSide()`, append `"Course Marks (highlighted rows)"` to unfilled fields warnings when there are incomplete or unfilled marks in started semesters.
+* **PDF Guard**: In `pdf()`, prompt confirmation if the report contains incomplete or unfilled course marks.
 
 ---
 
@@ -80,8 +91,10 @@ Expand PDF export capability and perform automated regression checks.
   * Grade letter mappings and points.
   * Course detention rules (`CIE < 40%` yields DX and excludes credits).
   * Prediction math solver outputs.
+  * Real-time warning logic for unfilled details and course marks.
 
 ### Manual Verification
 1. Select the new **ECS** branch from the dropdown; verify that the subject listing updates to the new curriculum structure and semesters 3 to 8 load successfully.
 2. Enter values in student profile and input marks for Sem 1 and Sem 2. Enter a Target CGPA of `8.50` with `6` semesters remaining. Confirm that the required SGPA is calculated correctly.
-3. Export the PDF report and inspect the target projection block at the bottom of Page 1.
+3. Start entering marks for a semester (e.g. Sem 3). Enter only one mark field and observe that other subjects are highlighted in yellow as unfilled. The warning container should show "Course Marks (highlighted rows)".
+4. Export the PDF report and inspect the target projection block at the bottom of Page 1.
