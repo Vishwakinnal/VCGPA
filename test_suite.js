@@ -58,6 +58,7 @@ global.localStorage = {
 };
 
 global.alert = () => {};
+global.confirm = () => true;
 
 global.location = {
   reload: () => {}
